@@ -1,0 +1,35 @@
+﻿using AutoMetricsService.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AutoMetricsService.Infrastructure.Data.Configurations
+{
+    public class SaleConfiguration : IEntityTypeConfiguration<Sale>
+    {
+        public void Configure(EntityTypeBuilder<Sale> builder)
+        {
+            builder.ToTable("Sales");
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.Units).IsRequired();
+            builder.Property(x => x.UnitPrice).HasPrecision(18, 2).IsRequired();
+            builder.Property(x => x.Total).HasPrecision(18, 2).IsRequired();
+            builder.Property(x => x.Date).IsRequired();
+
+            builder.HasOne<Car>()
+                .WithMany()
+                .HasForeignKey(x => x.CarId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne<Center>()
+                .WithMany()
+                .HasForeignKey(x => x.CenterId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+    }
+}
