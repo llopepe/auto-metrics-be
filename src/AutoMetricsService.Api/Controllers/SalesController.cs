@@ -16,6 +16,7 @@ namespace AutoMetricsService.Api.Controllers
         [SwaggerOperation("Obtener todas las ventas", "Listado de ventas Paginados")]
         public Task<PaginatedList<SaleDto>> GetAllWithPagination(ISender sender, [FromQuery] GetSaleWithPaginationQuery query)
         {
+            // llama al comando
             return sender.Send(query);
         }
 
