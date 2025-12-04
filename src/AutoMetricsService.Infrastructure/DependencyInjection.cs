@@ -3,6 +3,7 @@ using Core.Framework.Aplication.Interfaces.Data;
 using Core.Framework.Aplication.Interfaces.Repositories.Base;
 using Core.Framework.Infrastructure.Data;
 using Core.Framework.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
@@ -14,20 +15,9 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("PrimaryDbConnection");
-        var commandTimeout = configuration.GetValue<int>("CommandTimeout");
-
-        Guard.Against.Null(connectionString, message: "Connection string 'PrimaryDbConnection' not found.");
-
-        services.AddDbContext<ApplicationDbContext>((sp, options) =>
-        {
-            options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
-
-            options.UseSqlServer(connectionString,
-                 sqlServerOptions => sqlServerOptions.CommandTimeout(commandTimeout))
-            .EnableDetailedErrors(true)
-            .EnableSensitiveDataLogging(true);
-        });
+        // DB InMemory
+        services.AddDbContext<ApplicationDbContext>(opt =>
+                    opt.UseInMemoryDatabase("AutoMetricsDb"));
 
         // Base framework 
         services.AddScoped<AppDbContext, ApplicationDbContext>();
@@ -36,7 +26,17 @@ public static class DependencyInjection
 
         // Repositories
 
-
         return services;
+    }
+
+    public static IApplicationBuilder UseDataSeeder(this IApplicationBuilder app)
+    {
+        using (var scope = app.ApplicationServices.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            DbInitializer.Seed(db);
+        }
+
+        return app;
     }
 }
