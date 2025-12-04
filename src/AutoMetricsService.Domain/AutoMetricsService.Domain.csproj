@@ -14,8 +14,4 @@
     <ProjectReference Include="..\..\Framework\ApiBase\Core.Framework.Domain\Core.Framework.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Events\" />
-  </ItemGroup>
-
 </Project>

@@ -1,13 +1,13 @@
-﻿using AutoMetricsService.Infrastructure.Data;
+﻿using AutoMetricsService.Application.Interfaces.Repositories;
+using AutoMetricsService.Infrastructure.Data;
+using AutoMetricsService.Infrastructure.Repositories;
 using Core.Framework.Aplication.Interfaces.Data;
 using Core.Framework.Aplication.Interfaces.Repositories.Base;
 using Core.Framework.Infrastructure.Data;
 using Core.Framework.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
-using RestSharp;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -25,6 +25,10 @@ public static class DependencyInjection
         services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
         // Repositories
+        services.AddScoped<ICarRepository, CarRepository>();
+        services.AddScoped<ICarTaxRepository, CarTaxRepository>();
+        services.AddScoped<ICenterRepository, CenterRepository>();
+        services.AddScoped<ISaleRepository, SaleRepository>();
 
         return services;
     }

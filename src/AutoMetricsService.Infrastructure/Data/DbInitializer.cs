@@ -61,7 +61,9 @@ namespace AutoMetricsService.Infrastructure.Data
                     Units = 3,
                     UnitPrice = 8000m,
                     Total = 3 * 8000m,
-                    Date = new DateTimeOffset(2025, 1, 10, 0, 0, 0, TimeSpan.Zero)
+                    Date = new DateTimeOffset(2025, 1, 10, 0, 0, 0, TimeSpan.Zero),
+                    UserName = "System"
+
                 },
                 new Sale
                 {
@@ -71,7 +73,8 @@ namespace AutoMetricsService.Infrastructure.Data
                     Units = 4,
                     UnitPrice = 9500m,
                     Total = 4 * 9500m,
-                    Date = new DateTimeOffset(2025, 1, 25, 0, 0, 0, TimeSpan.Zero)
+                    Date = new DateTimeOffset(2025, 1, 25, 0, 0, 0, TimeSpan.Zero),
+                    UserName = "System"
                 },
                 new Sale
                 {
@@ -81,7 +84,8 @@ namespace AutoMetricsService.Infrastructure.Data
                     Units = 2,
                     UnitPrice = 12500m,
                     Total = 2 * 12500m,
-                    Date = new DateTimeOffset(2025, 2, 2, 0, 0, 0, TimeSpan.Zero)
+                    Date = new DateTimeOffset(2025, 2, 2, 0, 0, 0, TimeSpan.Zero),
+                    UserName = "System"
                 },
                 new Sale
                 {
@@ -91,7 +95,8 @@ namespace AutoMetricsService.Infrastructure.Data
                     Units = 1,
                     UnitPrice = 19474m,  // con impuesto del 7%
                     Total = 19474m,
-                    Date = new DateTimeOffset(2025, 2, 18, 0, 0, 0, TimeSpan.Zero)
+                    Date = new DateTimeOffset(2025, 2, 18, 0, 0, 0, TimeSpan.Zero),
+                    UserName = "System"
                 },
                 new Sale
                 {
@@ -101,7 +106,8 @@ namespace AutoMetricsService.Infrastructure.Data
                     Units = 5,
                     UnitPrice = 9500m,
                     Total = 5 * 9500m,
-                    Date = new DateTimeOffset(2025, 3, 5, 0, 0, 0, TimeSpan.Zero)
+                    Date = new DateTimeOffset(2025, 3, 5, 0, 0, 0, TimeSpan.Zero),
+                    UserName = "System"
                 },
                 new Sale
                 {
@@ -111,7 +117,8 @@ namespace AutoMetricsService.Infrastructure.Data
                     Units = 1,
                     UnitPrice = 12500m,
                     Total = 12500m,
-                    Date = new DateTimeOffset(2025, 3, 20, 0, 0, 0, TimeSpan.Zero)
+                    Date = new DateTimeOffset(2025, 3, 20, 0, 0, 0, TimeSpan.Zero),
+                    UserName = "System"
                 },
                 new Sale
                 {
@@ -121,7 +128,8 @@ namespace AutoMetricsService.Infrastructure.Data
                     Units = 2,
                     UnitPrice = 19474m,
                     Total = 2 * 19474m,
-                    Date = new DateTimeOffset(2025, 4, 12, 0, 0, 0, TimeSpan.Zero)
+                    Date = new DateTimeOffset(2025, 4, 12, 0, 0, 0, TimeSpan.Zero),
+                    UserName = "System"
                 },
                 new Sale
                 {
@@ -131,7 +139,8 @@ namespace AutoMetricsService.Infrastructure.Data
                     Units = 6,
                     UnitPrice = 8000m,
                     Total = 6 * 8000m,
-                    Date = new DateTimeOffset(2025, 5, 3, 0, 0, 0, TimeSpan.Zero)
+                    Date = new DateTimeOffset(2025, 5, 3, 0, 0, 0, TimeSpan.Zero),
+                    UserName = "System"
                 }
             };
 
