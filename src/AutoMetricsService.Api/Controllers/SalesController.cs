@@ -12,8 +12,8 @@ namespace AutoMetricsService.Api.Controllers
     [Route("api/[controller]")]
     public class SalesController : ControllerBase
     {
-        [HttpGet("GetSystemWithPagination")]
-        [SwaggerOperation("Obtener todos los sistemas", "Listado de sistemas Paginados")]
+        [HttpGet("GetSaleWithPagination")]
+        [SwaggerOperation("Obtener todas las ventas", "Listado de ventas Paginados")]
         public Task<PaginatedList<SaleDto>> GetAllWithPagination(ISender sender, [FromQuery] GetSaleWithPaginationQuery query)
         {
             return sender.Send(query);
@@ -22,7 +22,7 @@ namespace AutoMetricsService.Api.Controllers
 
 
         [HttpPost("CreateSale")]
-        [SwaggerOperation("Crear un sistema", "Datos del sistema")]
+        [SwaggerOperation("Crear un venta", "Datos del ventas")]
         public Task<ResultResponse<int>> CreateSystem(ISender sender, CreateSaleCommand command)
         {
             return sender.Send(command);
