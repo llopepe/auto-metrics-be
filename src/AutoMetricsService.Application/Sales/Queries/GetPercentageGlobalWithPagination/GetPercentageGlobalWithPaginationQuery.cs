@@ -16,7 +16,6 @@ namespace AutoMetricsService.Application.Sales.Queries.GetPercentageGlobalWithPa
 {
     public record GetPercentageGlobalWithPaginationQuery : IRequest<PaginatedList<PercentageGlobalDto>>
     {
-        public int? CenterId { get; set; }
         public string SortOrder { get; init; } = string.Empty;
         public string SortDirection { get; init; } = string.Empty;
         public int PageNumber { get; init; }

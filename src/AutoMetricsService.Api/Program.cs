@@ -36,11 +36,6 @@ else
 // Inicializar datos Base en memoria
 app.UseDataSeeder();
 
-// Pipeline
-app.UseRouting();
-app.UseCors("_configCors");
-app.UseMiddleware<ErrorHandlerMiddleware>();
-
 // Swagger
 app.UseSwagger();
 app.UseSwaggerUI(c =>
@@ -49,6 +44,14 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = "swagger";
 
 });
+
+
+
+// Pipeline
+app.UseMiddleware<ErrorHandlerMiddleware>();
+app.UseRouting();
+app.UseCors("_configCors");
+
 
 // Autenticación y autorización
 app.UseAuthentication();

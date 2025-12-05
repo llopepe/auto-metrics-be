@@ -4,6 +4,7 @@ using Core.Framework.Aplication.Common.Wrappers;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 using System.Net;
 using System.Text.Json;
 
@@ -23,12 +24,36 @@ namespace Core.Framework.Aplication.Common.Middleware
 
         public async Task InvokeAsync(HttpContext context)
         {
-            try
+            var path = context.Request.Path.Value;
+
+            // Excluir swagger
+            if (context.Request.Path.StartsWithSegments("/swagger"))
             {
                 await _next(context);
+                return;
+            }
+
+            var stopwatch = Stopwatch.StartNew();
+
+            // Registrar el agregado de headers ANTES de enviar la respuesta
+            context.Response.OnStarting(() =>
+            {
+                stopwatch.Stop();
+                context.Response.Headers["X-Execution-Time-ms"] = stopwatch.ElapsedMilliseconds.ToString();
+                return Task.CompletedTask;
+            });
+
+            try
+            {
+                
+                await _next(context);
+
             }
             catch (Exception error)
             {
+
+                stopwatch.Stop(); // Detener para saber el tiempo del error
+
                 var response = context.Response;
                 response.ContentType = "application/json";
                 var responseModel = ResultResponse.Failure();

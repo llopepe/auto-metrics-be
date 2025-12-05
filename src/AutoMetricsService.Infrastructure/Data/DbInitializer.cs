@@ -16,7 +16,8 @@ namespace AutoMetricsService.Infrastructure.Data
 
             SeedCars(db);
             SeedCenters(db);
-            SeedSales(db);            
+            SeedSales(db);
+            SeedCarTaxes(db);
         }
 
         private static void SeedCars(ApplicationDbContext db)
@@ -145,6 +146,17 @@ namespace AutoMetricsService.Infrastructure.Data
             };
 
             db.Sales.AddRange(sales);
+            db.SaveChanges();
+        }
+
+        private static void SeedCarTaxes(ApplicationDbContext db)
+        {
+            if (db.CarTaxes.Any()) return;
+
+            db.CarTaxes.AddRange(
+                new CarTax { Id = 1, Name= "Impuesto 7%", Percentage = 7 }
+            );
+
             db.SaveChanges();
         }
     }

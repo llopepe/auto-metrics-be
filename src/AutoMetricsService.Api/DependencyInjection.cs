@@ -1,16 +1,12 @@
 ﻿using AutoMetricsService.Application.Common.Extensions;
 using AutoMetricsService.Application.Common.Mappings;
 using AutoMetricsService.Infrastructure.Data;
-using AutoMetricsService.Infrastructure.Data.Configurations.Settings;
 using Mapster;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.IO.Compression;
-using System.Text;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -79,10 +75,10 @@ public static class DependencyInjection
         {
             options.AddPolicy("_configCors", policy =>
             {
-                policy.AllowAnyMethod()
-                      .SetIsOriginAllowed(origin => true)
-                      .AllowAnyHeader()
-                      .AllowCredentials();
+                policy.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .WithExposedHeaders("X-Execution-Time-ms");
             });
         });
 
@@ -91,50 +87,51 @@ public static class DependencyInjection
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
 
         //JWT Settings
-        services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+        //services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
-        var jwtSettings = configuration.GetSection("JwtSettings").Get<JwtSettings>();
-        var key = Encoding.UTF8.GetBytes(jwtSettings!.Secret);
+        //var jwtSettings = configuration.GetSection("JwtSettings").Get<JwtSettings>();
+        //var key = Encoding.UTF8.GetBytes(jwtSettings!.Secret);
 
-        services.AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        })
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
+        //services.AddAuthentication(options =>
+        //{
+        //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        //})
+        //    .AddJwtBearer(options =>
+        //    {
+        //        options.TokenValidationParameters = new TokenValidationParameters
+        //        {
+        //            ValidateIssuer = false,
+        //            ValidateAudience = false,
+        //            ValidateLifetime = true,
+        //            ValidateIssuerSigningKey = true,
 
-                    ValidIssuer = jwtSettings.Issuer,
-                    ValidAudience = jwtSettings.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ClockSkew = TimeSpan.Zero // no da tolerancia en expiración
-                };
+        //            ValidIssuer = jwtSettings.Issuer,
+        //            ValidAudience = jwtSettings.Audience,
+        //            IssuerSigningKey = new SymmetricSecurityKey(key),
+        //            ClockSkew = TimeSpan.Zero // no da tolerancia en expiración
+        //        };
 
-                //Nuevo bloque para capturar errores y derivarlos al middleware
-                options.Events = new JwtBearerEvents
-                {
-                    OnAuthenticationFailed = context =>
-                    {
-                        throw new UnauthorizedAccessException("El token JWT es inválido o ha expirado.");
-                    },
-                    OnChallenge = context =>
-                    {
-                        context.HandleResponse();
-                        throw new UnauthorizedAccessException("Acceso denegado. Token no encontrado o inválido.");
-                    }
-                };
-
-
-            });
+        //        //Nuevo bloque para capturar errores y derivarlos al middleware
+        //        options.Events = new JwtBearerEvents
+        //        {
+        //            OnAuthenticationFailed = context =>
+        //            {
+        //                throw new UnauthorizedAccessException("El token JWT es inválido o ha expirado.");
+        //            },
+        //            OnChallenge = context =>
+        //            {
+        //                context.HandleResponse();
+        //                throw new UnauthorizedAccessException("Acceso denegado. Token no encontrado o inválido.");
+        //            }
+        //        };
 
 
-        services.AddAuthorization();
+        //    });
+
+
+        //services.AddAuthorization();
+
 
         return services;
     }
