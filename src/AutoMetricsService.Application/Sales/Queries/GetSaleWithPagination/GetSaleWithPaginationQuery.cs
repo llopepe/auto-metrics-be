@@ -23,12 +23,12 @@ namespace AutoMetricsService.Application.Sales.Queries.GetSaleWithPagination
         public int PageSize { get; init; }
     }
 
-    public class GetSystemsWithPaginationQueryHandler : IRequestHandler<GetSaleWithPaginationQuery, PaginatedList<SaleDto>>
+    public class GetSaleWithPaginationQueryHandler : IRequestHandler<GetSaleWithPaginationQuery, PaginatedList<SaleDto>>
     {
         private readonly ILogger<GetSaleWithPaginationQuery> _logger;
         private readonly ISaleRepository _saleRepository;
 
-        public GetSystemsWithPaginationQueryHandler(ISaleRepository saleRepository, ILogger<GetSaleWithPaginationQuery> logger)
+        public GetSaleWithPaginationQueryHandler(ISaleRepository saleRepository, ILogger<GetSaleWithPaginationQuery> logger)
         {
             _saleRepository = saleRepository;
             _logger = logger;

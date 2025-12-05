@@ -35,6 +35,7 @@ namespace AutoMetricsService.Application.Sales.CreateSale
 
         public async Task<ResultResponse<int>> Handle(CreateSaleCommand request, CancellationToken cancellationToken)
         {
+           
             _logger.LogInformation("Ejecutando {Command}", request.GetType().Name);
 
             // Creo la entidad con los datos recibidos y agregar datos faltantes
