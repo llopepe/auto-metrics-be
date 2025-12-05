@@ -18,6 +18,7 @@ namespace AutoMetricsService.Infrastructure.Data.Configurations
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.Units).IsRequired();
             builder.Property(x => x.UnitPrice).HasPrecision(18, 2).IsRequired();
+            builder.Property(x => x.TotalTax).HasPrecision(18, 2).IsRequired();
             builder.Property(x => x.Total).HasPrecision(18, 2).IsRequired();
             builder.Property(x => x.Date).IsRequired();
 

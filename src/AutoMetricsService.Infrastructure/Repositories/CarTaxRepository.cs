@@ -59,5 +59,12 @@ namespace AutoMetricsService.Infrastructure.Repositories
             // --- PAGINACIÓN ---
             return await PaginatedList<CarTax>.CreateAsync(query, page, size);
         }
+
+        public async Task<IList<CarTax>> GetTaxesByCarIdAsync(int carId)
+        {
+            return await AppContext.CarTaxes
+                        .AsNoTracking()
+                        .Where(ct => ct.CarId == carId).ToListAsync();
+        }
     }
 }

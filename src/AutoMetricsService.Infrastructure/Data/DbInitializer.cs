@@ -61,6 +61,7 @@ namespace AutoMetricsService.Infrastructure.Data
                     CarId = 1, // Sedan
                     Units = 3,
                     UnitPrice = 8000m,
+                    TotalTax = 0,
                     Total = 3 * 8000m,
                     Date = new DateTimeOffset(2025, 1, 10, 0, 0, 0, TimeSpan.Zero),
                     UserName = "System"
@@ -73,6 +74,7 @@ namespace AutoMetricsService.Infrastructure.Data
                     CarId = 2, // SUV
                     Units = 4,
                     UnitPrice = 9500m,
+                    TotalTax = 0,
                     Total = 4 * 9500m,
                     Date = new DateTimeOffset(2025, 1, 25, 0, 0, 0, TimeSpan.Zero),
                     UserName = "System"
@@ -84,6 +86,7 @@ namespace AutoMetricsService.Infrastructure.Data
                     CarId = 3, // Offroad
                     Units = 2,
                     UnitPrice = 12500m,
+                    TotalTax = 0,
                     Total = 2 * 12500m,
                     Date = new DateTimeOffset(2025, 2, 2, 0, 0, 0, TimeSpan.Zero),
                     UserName = "System"
@@ -94,7 +97,8 @@ namespace AutoMetricsService.Infrastructure.Data
                     CenterId = 4,
                     CarId = 4, // Sport
                     Units = 1,
-                    UnitPrice = 19474m,  // con impuesto del 7%
+                    UnitPrice = 18200m,  // con impuesto del 7%
+                    TotalTax = 1274m,
                     Total = 19474m,
                     Date = new DateTimeOffset(2025, 2, 18, 0, 0, 0, TimeSpan.Zero),
                     UserName = "System"
@@ -106,6 +110,7 @@ namespace AutoMetricsService.Infrastructure.Data
                     CarId = 2, // SUV
                     Units = 5,
                     UnitPrice = 9500m,
+                    TotalTax = 0,
                     Total = 5 * 9500m,
                     Date = new DateTimeOffset(2025, 3, 5, 0, 0, 0, TimeSpan.Zero),
                     UserName = "System"
@@ -117,6 +122,7 @@ namespace AutoMetricsService.Infrastructure.Data
                     CarId = 3, // Offroad
                     Units = 1,
                     UnitPrice = 12500m,
+                    TotalTax = 0,
                     Total = 12500m,
                     Date = new DateTimeOffset(2025, 3, 20, 0, 0, 0, TimeSpan.Zero),
                     UserName = "System"
@@ -127,7 +133,8 @@ namespace AutoMetricsService.Infrastructure.Data
                     CenterId = 3,
                     CarId = 4, // Sport
                     Units = 2,
-                    UnitPrice = 19474m,
+                    UnitPrice = 18200m,
+                    TotalTax = 2 * 1274,
                     Total = 2 * 19474m,
                     Date = new DateTimeOffset(2025, 4, 12, 0, 0, 0, TimeSpan.Zero),
                     UserName = "System"
@@ -139,6 +146,7 @@ namespace AutoMetricsService.Infrastructure.Data
                     CarId = 1, // Sedan
                     Units = 6,
                     UnitPrice = 8000m,
+                    TotalTax = 0,
                     Total = 6 * 8000m,
                     Date = new DateTimeOffset(2025, 5, 3, 0, 0, 0, TimeSpan.Zero),
                     UserName = "System"
@@ -154,7 +162,7 @@ namespace AutoMetricsService.Infrastructure.Data
             if (db.CarTaxes.Any()) return;
 
             db.CarTaxes.AddRange(
-                new CarTax { Id = 1, Name= "Impuesto 7%", Percentage = 7 }
+                new CarTax { Id = 1, CarId= 4, Name= "Impuesto Sport 7%", Percentage = 7 }
             );
 
             db.SaveChanges();

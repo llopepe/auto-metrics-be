@@ -14,6 +14,7 @@ namespace AutoMetricsService.Application.Sales.Dto
         public int CarId { get; set; }
         public int Units { get; set; }
         public decimal UnitPrice { get; set; }
+        public decimal TotalTax { get; set; }
         public decimal Total { get; set; }
         public DateTimeOffset Date { get; set; }
         //public Center Center { get; set; } = null!;

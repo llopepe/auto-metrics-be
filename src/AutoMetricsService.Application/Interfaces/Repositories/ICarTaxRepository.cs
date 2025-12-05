@@ -13,5 +13,6 @@ namespace AutoMetricsService.Application.Interfaces.Repositories
     public interface ICarTaxRepository : IBaseRepository<CarTax>
     {
         Task<PaginatedList<CarTax>> GetAllPaginatedSearch(int page, int size, string search, string sortOrder, string sortDirection);
+        Task<IList<CarTax>> GetTaxesByCarIdAsync(int carId);
     }
 }
