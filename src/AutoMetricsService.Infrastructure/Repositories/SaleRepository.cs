@@ -27,7 +27,10 @@ namespace AutoMetricsService.Infrastructure.Repositories
             page = page <= 0 ? 1 : page;
             size = size <= 0 ? 10 : size;
 
-            IQueryable<Sale> query = AppContext.Sales.AsNoTracking();
+            IQueryable<Sale> query = AppContext.Sales
+                                    .AsNoTracking()
+                                    .Include(s => s.Car)
+                                    .Include(s => s.Center);
 
             //Filtro de búsqueda
             if (!string.IsNullOrWhiteSpace(search))

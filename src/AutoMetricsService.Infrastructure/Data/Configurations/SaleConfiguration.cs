@@ -22,14 +22,14 @@ namespace AutoMetricsService.Infrastructure.Data.Configurations
             builder.Property(x => x.Total).HasPrecision(18, 2).IsRequired();
             builder.Property(x => x.Date).IsRequired();
 
-            builder.HasOne<Car>()
-                .WithMany()
-                .HasForeignKey(x => x.CarId)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(s => s.Car)
+            .WithMany(c => c.Sales)
+            .HasForeignKey(s => s.CarId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne<Center>()
-                .WithMany()
-                .HasForeignKey(x => x.CenterId)
+            builder.HasOne(s => s.Center)
+                .WithMany(c => c.Sales)
+                .HasForeignKey(s => s.CenterId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

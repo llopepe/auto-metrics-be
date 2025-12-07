@@ -1,5 +1,6 @@
 ﻿using AutoMetricsService.Domain.Entities;
 using Core.Framework.Infrastructure.Data;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,45 @@ namespace AutoMetricsService.Infrastructure.Data
 {
     internal class DbInitializer
     {
-        public static void Seed(ApplicationDbContext db)
+        public static void Seed(ApplicationDbContext db, ILogger logger)
         {
-            db.Database.EnsureCreated();
+            logger.LogInformation("Checking database status...");
+            var created = db.Database.EnsureCreated();
 
-            SeedCars(db);
-            SeedCenters(db);
-            SeedSales(db);
-            SeedCarTaxes(db);
+            if (created)
+                logger.LogInformation("Database created (EnsureCreated).");
+            else
+                logger.LogInformation("Database already exists.");
+
+            logger.LogInformation("Seeding database...");
+ 
+
+            if (!db.Centers.Any())
+            {
+                SeedCenters(db);
+                logger.LogInformation("Centers seeded.");
+            }
+
+            if (!db.Cars.Any())
+            {
+                SeedCars(db);
+                logger.LogInformation("Cars seeded.");
+            }
+
+            if (!db.CarTaxes.Any())
+            {
+                SeedCarTaxes(db);
+                logger.LogInformation("CarTaxes seeded.");
+            }
+
+            if (!db.Sales.Any())
+            {
+                SeedSales(db);
+                logger.LogInformation("Sales seeded.");
+            }
+
+
+            logger.LogInformation("Database ready.");
         }
 
         private static void SeedCars(ApplicationDbContext db)

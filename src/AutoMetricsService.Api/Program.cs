@@ -45,20 +45,16 @@ app.UseSwaggerUI(c =>
 
 });
 
-
-
 // Pipeline
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseRouting();
 app.UseCors("_configCors");
-
 
 // Autenticación y autorización
 app.UseAuthentication();
 app.UseAuthorization();
 
 // Controllers y Logging
-
 app.MapControllers();
 app.UseSerilogRequestLogging();
 

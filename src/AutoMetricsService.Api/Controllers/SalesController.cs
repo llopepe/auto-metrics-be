@@ -17,10 +17,11 @@ namespace AutoMetricsService.Api.Controllers
     {
         [HttpPost("CreateSale")]
         [SwaggerOperation(
-                Summary = "Crear una venta", 
+                Summary = "Inserta una venta", 
                 Description = "Permite registrar los datos de ventas, calcular el precio total según el CarId y, en caso de que el vehículo tenga impuestos asociados, sumarlos automáticamente al total.")]
         public Task<ResultResponse<int>> CreateSystem(ISender sender, CreateSaleCommand command)
         {
+            // llama al comando
             return sender.Send(command);
         }
 
@@ -41,6 +42,7 @@ namespace AutoMetricsService.Api.Controllers
                 Description = "Obtiene el total de todos los centros")]
         public Task<ResultResponse<TotalSalesVolumeDto>> GetTotalSalesVolume(ISender sender, CancellationToken cancellationToken)
         {
+            // llama al comando
             return sender.Send(new GetTotalSalesVolumeQuery(), cancellationToken);
         }
 
@@ -51,6 +53,7 @@ namespace AutoMetricsService.Api.Controllers
         public Task<PaginatedList<SalesVolumeCenterDto>> GetSalesByCenterWithPagination(ISender sender, [FromQuery] GetSalesByCenterWithPaginationQuery query,
                                                                                  CancellationToken cancellationToken)
         {
+            // llama al comando
             return sender.Send(query, cancellationToken);
         }
 
@@ -61,6 +64,7 @@ namespace AutoMetricsService.Api.Controllers
         public Task<PaginatedList<PercentageGlobalDto>> GetPercentageGlobalWithPagination(ISender sender, [FromQuery] GetPercentageGlobalWithPaginationQuery query,
                                                                             CancellationToken cancellationToken)
         {
+            // llama al comando
             return sender.Send(query, cancellationToken);
         }
     }

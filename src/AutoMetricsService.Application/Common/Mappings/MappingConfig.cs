@@ -1,4 +1,6 @@
-﻿using Mapster;
+﻿using AutoMetricsService.Application.Sales.Dto;
+using AutoMetricsService.Domain.Entities;
+using Mapster;
 
 namespace AutoMetricsService.Application.Common.Mappings
 {
@@ -10,6 +12,10 @@ namespace AutoMetricsService.Application.Common.Mappings
             //config.NewConfig<ProcessItem, LookupDto>()
             //     .Map(dest => dest.Description, src => src.ProcessDescription);
 
+
+            TypeAdapterConfig<Sale, SaleDto>.NewConfig()
+            .Map(dest => dest.CenterName, src => src.Center.Name)
+            .Map(dest => dest.CarModel, src => src.Car.Name);
         }
     }
 }

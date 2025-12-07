@@ -8,6 +8,7 @@ using Core.Framework.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -37,8 +38,9 @@ public static class DependencyInjection
     {
         using (var scope = app.ApplicationServices.CreateScope())
         {
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<ApplicationDbContext>>();
             var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            DbInitializer.Seed(db);
+            DbInitializer.Seed(db, logger);
         }
 
         return app;

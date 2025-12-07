@@ -92,7 +92,10 @@ namespace AutoMetricsService.Application.Sales.CreateSale
             var car = await _carRepository.GetByIdAsync(carId)
                       ?? throw new Exception($"Car with ID {carId} not found.");
 
+            //Precio por unidad sin impuestos
             decimal baseUnitPrice = car.Price;
+
+            // Calcular total base sin impuestos
             decimal baseTotal = baseUnitPrice * units;
 
             // Obtener impuestos asociados
@@ -101,14 +104,19 @@ namespace AutoMetricsService.Application.Sales.CreateSale
             decimal totalWithTaxes = baseTotal;
 
             // Si hay impuestos, los aplico uno por uno sobre el total base
-            if (taxes?.Any() == true)
+            if (taxes is { Count: > 0 })
             {
                 foreach (var tax in taxes)
                 {
-                    totalWithTaxes += baseTotal * (tax.Percentage / 100m);
+                    // Evita nulos y porcentajes no válidos
+                    if (tax is not null && tax.Percentage > 0)
+                    {
+                        totalWithTaxes += baseTotal * (tax.Percentage / 100m);
+                    }
                 }
             }
 
+            // Redondeo a 2 decimales
             totalWithTaxes = Math.Round(totalWithTaxes, 2);
 
             // Cálculos finales
