@@ -1,4 +1,6 @@
 ﻿using Core.Framework.Aplication.Common.Middleware;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +37,12 @@ else
 
 // Inicializar datos Base en memoria
 app.UseDataSeeder();
+
+// Health Checks
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 // Swagger
 app.UseSwagger();

@@ -4,6 +4,7 @@ using AutoMetricsService.Infrastructure.Data;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.IO.Compression;
@@ -28,7 +29,9 @@ public static class DependencyInjection
         // Scoped services
         services.AddHttpContextAccessor();
 
+        //Permiten exponer un endpoint que informa el estado del microservicio
         services.AddHealthChecks()
+            .AddCheck("self", () => HealthCheckResult.Healthy())
             .AddDbContextCheck<ApplicationDbContext>();
 
         services.AddRazorPages();

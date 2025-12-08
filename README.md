@@ -336,6 +336,30 @@ Perfecto para microservicios
 Ideal para:  
 Kubernetes, Docker, Balanceadores.
 
+Abrí:
+
+👉http://localhost:5000/health
+
+Respuesta:
+{
+	status: "Healthy",
+	totalDuration: "00:00:00.0383996",
+	entries: {
+		self: {
+			data: { },
+			duration: "00:00:00.0018450",
+			status: "Healthy",
+			tags: [ ]
+		},
+		ApplicationDbContext: {
+			data: { },
+			duration: "00:00:00.0233408",
+			status: "Healthy",
+			tags: [ ]
+		}
+	}
+}
+
 ### 11. **Microservicios**
 - Escalado independiente  
 - Resiliencia  
