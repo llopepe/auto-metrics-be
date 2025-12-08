@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace AutoMetricsService.Infrastructure.Data.Configurations
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class CenterConfiguration : IEntityTypeConfiguration<Center>
     {
         public void Configure(EntityTypeBuilder<Center> builder)

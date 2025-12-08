@@ -186,5 +186,10 @@ namespace AutoMetricsService.Infrastructure.Repositories
             // Paginado
             return await PaginatedList<PercentageGlobalCustom>.CreateAsync(percentageGlobalQuery, page, size);
         }
+
+        public async Task<bool> ExistsAsync(int id, CancellationToken ct)
+        {
+            return await _dbSet.AnyAsync(c => c.Id == id, ct);
+        }
     }
 }

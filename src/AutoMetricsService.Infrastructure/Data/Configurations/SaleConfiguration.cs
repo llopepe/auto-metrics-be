@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace AutoMetricsService.Infrastructure.Data.Configurations
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class SaleConfiguration : IEntityTypeConfiguration<Sale>
     {
         public void Configure(EntityTypeBuilder<Sale> builder)

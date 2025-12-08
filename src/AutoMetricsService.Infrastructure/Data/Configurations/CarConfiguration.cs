@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace AutoMetricsService.Infrastructure.Data.Configurations
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class CarConfiguration : IEntityTypeConfiguration<Car>
     {
         public void Configure(EntityTypeBuilder<Car> builder)

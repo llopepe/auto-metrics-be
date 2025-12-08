@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace AutoMetricsService.Infrastructure.Data
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     internal class DbInitializer
     {
         public static void Seed(ApplicationDbContext db, ILogger logger)

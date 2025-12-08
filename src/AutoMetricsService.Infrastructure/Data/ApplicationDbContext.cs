@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutoMetricsService.Infrastructure.Data
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class ApplicationDbContext : AppDbContext
     {
 
