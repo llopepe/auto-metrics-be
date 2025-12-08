@@ -1,5 +1,4 @@
 ﻿using AutoMetricsService.Application.Interfaces.Repositories;
-using AutoMetricsService.Domain.Entities;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -44,7 +43,7 @@ namespace AutoMetricsService.Application.Sales.CreateSale
 
         private async Task<bool> CarExists(int carId, CancellationToken ct)
         {
-            return await _carRepository.ExistsAsync(carId,ct);
+            return await _carRepository.ExistsAsync(carId, ct);
         }
     }
 }

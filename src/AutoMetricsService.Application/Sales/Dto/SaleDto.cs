@@ -1,9 +1,4 @@
-﻿using AutoMetricsService.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace AutoMetricsService.Application.Sales.Dto
 {
@@ -18,7 +13,7 @@ namespace AutoMetricsService.Application.Sales.Dto
         public decimal UnitPrice { get; set; }
         public decimal TotalTax { get; set; }
         public decimal Total { get; set; }
-        public DateTimeOffset Date { get; set; } 
+        public DateTimeOffset Date { get; set; }
         public string UserName { get; set; } = string.Empty;
     }
 }

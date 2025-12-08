@@ -45,7 +45,7 @@ namespace Core.Framework.Aplication.Common.Middleware
 
             try
             {
-                
+
                 await _next(context);
 
             }

@@ -1,5 +1,4 @@
 ﻿using AutoMetricsService.Application.Sales.Dto;
-using AutoMetricsService.Application.Security.Dto;
 using AutoMetricsService.Domain.Entities;
 using Mapster;
 

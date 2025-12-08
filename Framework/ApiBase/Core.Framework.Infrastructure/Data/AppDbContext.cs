@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 
 namespace Core.Framework.Infrastructure.Data
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class AppDbContext : DbContext
     {
 

@@ -1,12 +1,9 @@
 ﻿using AutoMetricsService.Domain.Entities;
-using Core.Framework.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoMetricsService.Infrastructure.Data
 {
@@ -24,7 +21,7 @@ namespace AutoMetricsService.Infrastructure.Data
                 logger.LogInformation("Database already exists.");
 
             logger.LogInformation("Seeding database...");
- 
+
 
             if (!db.Centers.Any())
             {
@@ -79,7 +76,7 @@ namespace AutoMetricsService.Infrastructure.Data
 
             db.Centers.AddRange(
                 new Center { Id = 1, Name = "Centro Norte" },
-                new Center { Id = 2, Name = "Centro Sur"},
+                new Center { Id = 2, Name = "Centro Sur" },
                 new Center { Id = 3, Name = "Distribuidor Andes" },
                 new Center { Id = 4, Name = "Costa Premium" }
             );
@@ -201,7 +198,7 @@ namespace AutoMetricsService.Infrastructure.Data
             if (db.CarTaxes.Any()) return;
 
             db.CarTaxes.AddRange(
-                new CarTax { Id = 1, CarId= 4, Name= "Impuesto Sport 7%", Percentage = 7 }
+                new CarTax { Id = 1, CarId = 4, Name = "Impuesto Sport 7%", Percentage = 7 }
             );
 
             db.SaveChanges();
@@ -221,7 +218,7 @@ namespace AutoMetricsService.Infrastructure.Data
                     IsActive = true
                 };
                 var hasher = new PasswordHasher<User>();
-                admin.PasswordHash = hasher.HashPassword(admin, "Admin123!"); 
+                admin.PasswordHash = hasher.HashPassword(admin, "Admin123!");
 
                 db.Users.Add(admin);
                 db.SaveChanges();

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Core.Framework.Infrastructure.Data
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class UnitOfWork : IUnitOfWork
     {
         private readonly AppDbContext _context;

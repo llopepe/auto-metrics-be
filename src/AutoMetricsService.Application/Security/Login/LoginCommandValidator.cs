@@ -23,9 +23,9 @@ namespace AutoMetricsService.Application.Security.Login
 
         private async Task<bool> UserExits(string email, CancellationToken token)
         {
-           var user = await _userRepository.GetOneAsync(u => u.Email == email);
+            var user = await _userRepository.GetOneAsync(u => u.Email == email);
 
-            return user != null;    
+            return user != null;
         }
 
 

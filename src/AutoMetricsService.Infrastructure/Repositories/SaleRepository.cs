@@ -21,7 +21,7 @@ namespace AutoMetricsService.Infrastructure.Repositories
         {
         }
 
-        public async Task<PaginatedList<Sale>> GetAllPaginatedSearch(int page, int size, string search, 
+        public async Task<PaginatedList<Sale>> GetAllPaginatedSearch(int page, int size, string search,
                                                                     string sortOrder, string sortDirection)
         {
             page = page <= 0 ? 1 : page;
@@ -62,13 +62,13 @@ namespace AutoMetricsService.Infrastructure.Repositories
             //Paginado
             return await PaginatedList<Sale>.CreateAsync(query, page, size);
         }
-    
+
         public async Task<decimal> GetTotalSalesVolumeAsync(CancellationToken cancellationToken)
         {
             return await AppContext.Sales.AsNoTracking().SumAsync(s => s.Total, cancellationToken);
         }
 
-        public async Task<PaginatedList<SalesVolumeCenterCustom>> GetSalesByCenterPaginatedAsync( int? centerId, int page,
+        public async Task<PaginatedList<SalesVolumeCenterCustom>> GetSalesByCenterPaginatedAsync(int? centerId, int page,
                                                                                     int size,
                                                                                     string sortOrder,
                                                                                     string sortDirection,
@@ -123,10 +123,10 @@ namespace AutoMetricsService.Infrastructure.Repositories
                 : groupedQuery.OrderBy(e => EF.Property<object>(e, sortColumn));
 
             // Paginado
-            return await PaginatedList<SalesVolumeCenterCustom>.CreateAsync(groupedQuery,page,size );
+            return await PaginatedList<SalesVolumeCenterCustom>.CreateAsync(groupedQuery, page, size);
         }
 
-        public async Task<PaginatedList<PercentageGlobalCustom>> GetPercentageGlobalPaginatedAsync( int page,
+        public async Task<PaginatedList<PercentageGlobalCustom>> GetPercentageGlobalPaginatedAsync(int page,
                                                                                   int size,
                                                                                   string sortOrder,
                                                                                   string sortDirection,
@@ -154,7 +154,7 @@ namespace AutoMetricsService.Infrastructure.Repositories
                                          CarId = g.Key.CarId,
                                          CarModel = g.Key.CarModel,
                                          UnitsSold = g.Sum(x => x.s.Units),
-                                         PercentageOfGlobal = Math.Round((decimal)g.Sum(x => x.s.Units) * 100 / totalUnits,4)
+                                         PercentageOfGlobal = Math.Round((decimal)g.Sum(x => x.s.Units) * 100 / totalUnits, 4)
                                      };
 
             percentageGlobalQuery = percentageGlobalQuery

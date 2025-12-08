@@ -1,14 +1,9 @@
 ﻿using AutoMetricsService.Application.Common.Extensions;
 using AutoMetricsService.Application.Interfaces.Repositories;
 using AutoMetricsService.Application.Sales.Dto;
-using AutoMetricsService.Application.Sales.Queries.GetSalesByCenterWithPagination;
 using AutoMetricsService.Domain.EntitiesCustom;
 using Core.Framework.Aplication.Common.Wrappers;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

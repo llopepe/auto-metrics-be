@@ -7,8 +7,6 @@ using Core.Framework.Aplication.Common.Wrappers;
 using Core.Framework.Aplication.Interfaces.Data;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,14 +25,14 @@ namespace AutoMetricsService.Application.Sales.CreateSale
         private readonly ILogger<CreateSaleCommandHandler> _logger;
         private readonly ISaleRepository _saleRepository;
         private readonly ICarRepository _carRepository;
-        private readonly ICarTaxRepository  _carTaxRepository;
+        private readonly ICarTaxRepository _carTaxRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public CreateSaleCommandHandler(ISaleRepository saleRepository, IUnitOfWork unit, ILogger<CreateSaleCommandHandler> logger,
                                           ICarRepository carRepository, ICarTaxRepository carTaxRepository)
-        { 
+        {
             _saleRepository = saleRepository;
-            _unitOfWork = unit; 
+            _unitOfWork = unit;
             _logger = logger;
             _carRepository = carRepository;
             _carTaxRepository = carTaxRepository;
@@ -43,7 +41,7 @@ namespace AutoMetricsService.Application.Sales.CreateSale
 
         public async Task<ResultResponse<int>> Handle(CreateSaleCommand request, CancellationToken cancellationToken)
         {
-           
+
             _logger.LogInformation("Ejecutando {Command}", request.GetType().Name);
 
             // Calcular total (precio base * unidades + impuesto si los tiene)
@@ -121,7 +119,7 @@ namespace AutoMetricsService.Application.Sales.CreateSale
 
             // Cálculos finales
             decimal totalTax = totalWithTaxes - baseTotal;
-  
+
             return new SaleAmountResultCustom
             {
                 UnitPrice = Math.Round(car.Price, 2),

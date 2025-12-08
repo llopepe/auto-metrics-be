@@ -1,15 +1,9 @@
 ﻿using AutoMetricsService.Application.Common.Extensions;
 using AutoMetricsService.Application.Interfaces.Repositories;
-using AutoMetricsService.Application.Sales.CreateSale;
 using AutoMetricsService.Application.Sales.Dto;
-using AutoMetricsService.Domain.Entities;
 using AutoMetricsService.Domain.EntitiesCustom;
 using Core.Framework.Aplication.Common.Wrappers;
-using Mapster;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -40,8 +34,8 @@ namespace AutoMetricsService.Application.Sales.Queries.GetSalesByCenterWithPagin
             _logger.LogInformation("Ejecutando {Command}", request.GetType().Name);
 
             //Obtengo los datos Paginados
-            var result = await _saleRepository.GetSalesByCenterPaginatedAsync(request.CenterId, request.PageNumber, 
-                                                                            request.PageSize, request.SortOrder, 
+            var result = await _saleRepository.GetSalesByCenterPaginatedAsync(request.CenterId, request.PageNumber,
+                                                                            request.PageSize, request.SortOrder,
                                                                             request.SortDirection, cancellationToken);
 
             // Convierto los datos

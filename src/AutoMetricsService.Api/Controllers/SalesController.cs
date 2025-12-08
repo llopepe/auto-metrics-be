@@ -19,7 +19,7 @@ namespace AutoMetricsService.Api.Controllers
     {
         [HttpPost("CreateSale")]
         [SwaggerOperation(
-                Summary = "Inserta una venta", 
+                Summary = "Inserta una venta",
                 Description = "Permite registrar los datos de ventas, calcular el precio total según el CarId y, en caso de que el vehículo tenga impuestos asociados, sumarlos automáticamente al total.")]
         public async Task<ResultResponse<int>> CreateSystem(ISender sender, CreateSaleCommand command)
         {
@@ -29,7 +29,7 @@ namespace AutoMetricsService.Api.Controllers
 
         [HttpGet("GetSaleWithPagination")]
         [SwaggerOperation(
-                Summary = "Obtener listado paginado de ventas de todos los centros", 
+                Summary = "Obtener listado paginado de ventas de todos los centros",
                 Description = "Listado de ventas Paginados")]
         public async Task<PaginatedList<SaleDto>> GetAllWithPagination(ISender sender, [FromQuery] GetSaleWithPaginationQuery query,
                                                                                  CancellationToken cancellationToken)
@@ -40,7 +40,7 @@ namespace AutoMetricsService.Api.Controllers
 
         [HttpGet("GetTotalSalesVolume")]
         [SwaggerOperation(
-                Summary = "Obtener el volumen de ventas total", 
+                Summary = "Obtener el volumen de ventas total",
                 Description = "Obtiene el total de todos los centros")]
         public async Task<ResultResponse<TotalSalesVolumeDto>> GetTotalSalesVolume(ISender sender, CancellationToken cancellationToken)
         {
@@ -50,8 +50,8 @@ namespace AutoMetricsService.Api.Controllers
 
         [HttpGet("GetSalesByCenterWithPagination")]
         [SwaggerOperation(
-            Summary ="Obtener volumen de ventas por centro", 
-            Description ="Obtiene el total por centro paginados, tiene un filtro opcional que permite filtrar los datos por CentroId")]
+            Summary = "Obtener volumen de ventas por centro",
+            Description = "Obtiene el total por centro paginados, tiene un filtro opcional que permite filtrar los datos por CentroId")]
         public async Task<PaginatedList<SalesVolumeCenterDto>> GetSalesByCenterWithPagination(ISender sender, [FromQuery] GetSalesByCenterWithPaginationQuery query,
                                                                                  CancellationToken cancellationToken)
         {

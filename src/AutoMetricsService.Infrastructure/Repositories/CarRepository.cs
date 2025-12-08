@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -65,7 +64,7 @@ namespace AutoMetricsService.Infrastructure.Repositories
 
         public async Task<bool> ExistsAsync(int id, CancellationToken ct)
         {
-            return await _dbSet.AnyAsync(c => c.Id == id,ct);
+            return await _dbSet.AnyAsync(c => c.Id == id, ct);
         }
     }
 }

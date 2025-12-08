@@ -22,7 +22,7 @@ namespace AutoMetricsService.Application.Security.Login
     }
 
 
-    public class LoginCommandRequest : IRequestHandler<LoginCommand,ResultResponse<LoginResponseDto>>
+    public class LoginCommandRequest : IRequestHandler<LoginCommand, ResultResponse<LoginResponseDto>>
     {
         private readonly ILogger<LoginCommandRequest> _logger;
         private readonly IUserRepository _userRepository;

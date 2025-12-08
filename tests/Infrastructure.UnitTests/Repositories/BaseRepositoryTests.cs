@@ -1,16 +1,10 @@
 ﻿using AutoMetricsService.Domain.Entities;
 using AutoMetricsService.Infrastructure.Data;
-using Core.Framework.Infrastructure.Data;
 using Core.Framework.Infrastructure.Repositories;
 using Infrastructure.UnitTests.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.UnitTests.Repositories
 {

@@ -24,7 +24,7 @@ namespace AutoMetricsService.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new CarConfiguration ());
+            modelBuilder.ApplyConfiguration(new CarConfiguration());
             modelBuilder.ApplyConfiguration(new CenterConfiguration());
             modelBuilder.ApplyConfiguration(new SaleConfiguration());
             modelBuilder.ApplyConfiguration(new CarTaxConfiguration());

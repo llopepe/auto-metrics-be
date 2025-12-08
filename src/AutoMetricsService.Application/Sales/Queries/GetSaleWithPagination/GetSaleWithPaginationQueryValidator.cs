@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AutoMetricsService.Application.Sales.Queries.GetSaleWithPagination
+﻿namespace AutoMetricsService.Application.Sales.Queries.GetSaleWithPagination
 {
     public class GetSaleWithPaginationQueryValidator : AbstractValidator<GetSaleWithPaginationQuery>
     {
