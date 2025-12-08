@@ -1,5 +1,6 @@
 ﻿using AutoMetricsService.Domain.Entities;
 using Core.Framework.Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,11 @@ namespace AutoMetricsService.Infrastructure.Data
                 logger.LogInformation("Sales seeded.");
             }
 
+            if (!db.Users.Any())
+            {
+                SeedUser(db);
+                logger.LogInformation("Users seeded.");
+            }
 
             logger.LogInformation("Database ready.");
         }
@@ -198,6 +204,27 @@ namespace AutoMetricsService.Infrastructure.Data
             );
 
             db.SaveChanges();
+        }
+
+        private static void SeedUser(ApplicationDbContext db)
+        {
+            if (db.Users.Any()) return;
+
+            if (!db.Users.Any(u => u.Email == "admin@autometrics.dev"))
+            {
+                var admin = new User
+                {
+                    Email = "admin@autometrics.dev",
+                    FullName = "AutoMetrics Admin",
+                    Roles = "Admin,User",
+                    IsActive = true
+                };
+                var hasher = new PasswordHasher<User>();
+                admin.PasswordHash = hasher.HashPassword(admin, "Admin123!"); 
+
+                db.Users.Add(admin);
+                db.SaveChanges();
+            }
         }
     }
 }

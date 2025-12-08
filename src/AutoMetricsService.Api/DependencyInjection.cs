@@ -1,13 +1,17 @@
 ﻿using AutoMetricsService.Application.Common.Extensions;
 using AutoMetricsService.Application.Common.Mappings;
 using AutoMetricsService.Infrastructure.Data;
+using Core.Framework.Aplication.Common.Security;
 using Mapster;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.IO.Compression;
+using System.Text;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -29,7 +33,7 @@ public static class DependencyInjection
         // Scoped services
         services.AddHttpContextAccessor();
 
-        //Permiten exponer un endpoint que informa el estado del microservicio
+        // Health Checks
         services.AddHealthChecks()
             .AddCheck("self", () => HealthCheckResult.Healthy())
             .AddDbContextCheck<ApplicationDbContext>();
@@ -81,7 +85,7 @@ public static class DependencyInjection
                 policy.AllowAnyOrigin()
                            .AllowAnyMethod()
                            .AllowAnyHeader()
-                           .WithExposedHeaders("X-Execution-Time-ms");
+                           .WithExposedHeaders("X-Execution-Time-ms"); //Muestra tiempo de ejecución en milisegundos desde el middleware
             });
         });
 
@@ -89,56 +93,46 @@ public static class DependencyInjection
         var applicationAssembly = typeof(MappingConfig).Assembly; // cualquier tipo de la capa Application
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
 
-        //JWT Settings
-        //services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
-
-        //var jwtSettings = configuration.GetSection("JwtSettings").Get<JwtSettings>();
-        //var key = Encoding.UTF8.GetBytes(jwtSettings!.Secret);
-
-        //services.AddAuthentication(options =>
-        //{
-        //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        //})
-        //    .AddJwtBearer(options =>
-        //    {
-        //        options.TokenValidationParameters = new TokenValidationParameters
-        //        {
-        //            ValidateIssuer = false,
-        //            ValidateAudience = false,
-        //            ValidateLifetime = true,
-        //            ValidateIssuerSigningKey = true,
-
-        //            ValidIssuer = jwtSettings.Issuer,
-        //            ValidAudience = jwtSettings.Audience,
-        //            IssuerSigningKey = new SymmetricSecurityKey(key),
-        //            ClockSkew = TimeSpan.Zero // no da tolerancia en expiración
-        //        };
-
-        //        //Nuevo bloque para capturar errores y derivarlos al middleware
-        //        options.Events = new JwtBearerEvents
-        //        {
-        //            OnAuthenticationFailed = context =>
-        //            {
-        //                throw new UnauthorizedAccessException("El token JWT es inválido o ha expirado.");
-        //            },
-        //            OnChallenge = context =>
-        //            {
-        //                context.HandleResponse();
-        //                throw new UnauthorizedAccessException("Acceso denegado. Token no encontrado o inválido.");
-        //            }
-        //        };
-
-
-        //    });
-
-
-        //services.AddAuthorization();
-
+        // JWT Authentication
+        services.AddJwtAuthentication(configuration);
 
         return services;
     }
+
+    private static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
+    {
+        var jwtSettings = new JwtSettings();
+        configuration.GetSection("JwtSettings").Bind(jwtSettings);
+
+        services.AddSingleton(jwtSettings);
+
+        services
+            .AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtSettings.Issuer,
+                    ValidAudience = jwtSettings.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
+        return services;
+    }
+
+
 }
+
 
 // Resolver que acepta camelCase y snake_case automáticamente
 public class CamelCaseAndSnakeCaseResolver : DefaultContractResolver

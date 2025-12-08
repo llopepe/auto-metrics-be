@@ -19,6 +19,7 @@ namespace AutoMetricsService.Infrastructure.Data
         public DbSet<Center> Centers => Set<Center>();
         public DbSet<Sale> Sales => Set<Sale>();
         public DbSet<CarTax> CarTaxes => Set<CarTax>();
+        public DbSet<User> Users => Set<User>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +27,7 @@ namespace AutoMetricsService.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new CenterConfiguration());
             modelBuilder.ApplyConfiguration(new SaleConfiguration());
             modelBuilder.ApplyConfiguration(new CarTaxConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

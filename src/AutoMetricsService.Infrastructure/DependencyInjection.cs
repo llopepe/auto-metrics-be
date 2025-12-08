@@ -1,4 +1,6 @@
-﻿using AutoMetricsService.Application.Interfaces.Repositories;
+﻿using AutoMetricsService.Application.Interfaces.Auth;
+using AutoMetricsService.Application.Interfaces.Repositories;
+using AutoMetricsService.Infrastructure.Auth;
 using AutoMetricsService.Infrastructure.Data;
 using AutoMetricsService.Infrastructure.Repositories;
 using Core.Framework.Aplication.Interfaces.Data;
@@ -30,6 +32,10 @@ public static class DependencyInjection
         services.AddScoped<ICarTaxRepository, CarTaxRepository>();
         services.AddScoped<ICenterRepository, CenterRepository>();
         services.AddScoped<ISaleRepository, SaleRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+
+        //Services
+        services.AddScoped<IJwtTokenService, JwtTokenService>();
 
         return services;
     }
