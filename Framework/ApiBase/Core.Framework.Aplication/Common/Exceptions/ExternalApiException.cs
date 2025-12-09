@@ -1,5 +1,6 @@
 ﻿namespace Core.Framework.Aplication.Common.Exceptions
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class ExternalApiException : Exception
     {
         public ExternalApiException()

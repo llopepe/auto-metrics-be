@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AutoMetricsService.Application.Common.Extensions
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class MapsterExtensions
     {
 

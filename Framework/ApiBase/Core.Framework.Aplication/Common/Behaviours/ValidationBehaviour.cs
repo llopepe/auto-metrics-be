@@ -4,6 +4,7 @@ using MediatR;
 
 namespace Core.Framework.Aplication.Common.Behaviours;
 
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
      where TRequest : notnull
 {

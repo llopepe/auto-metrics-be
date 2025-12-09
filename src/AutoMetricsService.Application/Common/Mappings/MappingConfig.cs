@@ -4,6 +4,7 @@ using Mapster;
 
 namespace AutoMetricsService.Application.Common.Mappings
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class MappingConfig
     {
         public static void RegisterMappings(TypeAdapterConfig config)

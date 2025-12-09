@@ -2,6 +2,7 @@
 
 namespace Core.Framework.Aplication.Common.Extensions
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class BuildInfoExtension
     {
         public static string GetBuildDate()

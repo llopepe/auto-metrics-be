@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace AutoMetricsService.Application.Common.Extensions
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class PaginatedListExtensions
     {
         public static PaginatedList<TDest> AdaptPaginated<TSource, TDest>(

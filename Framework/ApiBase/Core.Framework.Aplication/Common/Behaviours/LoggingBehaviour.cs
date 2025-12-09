@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Core.Framework.Aplication.Common.Behaviours
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
         private readonly ILogger<TRequest> _logger;

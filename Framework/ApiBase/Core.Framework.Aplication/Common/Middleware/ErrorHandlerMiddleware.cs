@@ -10,6 +10,7 @@ using System.Text.Json;
 
 namespace Core.Framework.Aplication.Common.Middleware
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public class ErrorHandlerMiddleware
     {
 

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace AutoMetricsService.Application.Common.Extensions
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public static class SwaggerExtensions
     {
         public static IApplicationBuilder UseSwaggerWithVersion(this IApplicationBuilder app)

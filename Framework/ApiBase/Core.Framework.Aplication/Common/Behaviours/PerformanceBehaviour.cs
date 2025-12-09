@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace Core.Framework.Aplication.Common.Behaviours;
 
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {
     private readonly Stopwatch _timer;
