@@ -2,7 +2,6 @@
 
 namespace Core.Framework.Aplication.Common.Wrappers;
 
-[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public class PaginatedList<T>
 {
     public IReadOnlyCollection<T> Items { get; }

@@ -1,6 +1,5 @@
 ﻿namespace Core.Framework.Aplication.Common.Wrappers;
 
-[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public class ResultResponse
 {
     public bool Success { get; set; }

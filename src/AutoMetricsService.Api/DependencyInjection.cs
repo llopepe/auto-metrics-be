@@ -15,6 +15,7 @@ using System.Text;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 public static class DependencyInjection
 {
     public static IServiceCollection AddWebServices(this IServiceCollection services, IConfiguration configuration)
