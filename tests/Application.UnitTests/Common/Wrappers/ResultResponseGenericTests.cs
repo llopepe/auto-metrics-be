@@ -1,10 +1,5 @@
 ﻿using Core.Framework.Aplication.Common.Enums;
 using Core.Framework.Aplication.Common.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.UnitTests.Common.Wrappers
 {

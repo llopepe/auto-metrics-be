@@ -7,12 +7,7 @@ using Core.Framework.Aplication.Common.Security;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.UnitTests.Security.Login
 {
@@ -63,7 +58,7 @@ namespace Application.UnitTests.Security.Login
             user.PasswordHash = hasher.HashPassword(user, "123456");
 
             _userRepoMock
-               .Setup(r => r.GetOneAsync(It.IsAny< Expression<Func<User, bool>>>()))
+               .Setup(r => r.GetOneAsync(It.IsAny<Expression<Func<User, bool>>>()))
                .ReturnsAsync(user);
 
 

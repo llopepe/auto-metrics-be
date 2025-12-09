@@ -49,7 +49,7 @@ namespace Infrastructure.UnitTests.Repositories
         public async Task GetAllPaginatedSearch_ShouldFilterByName()
         {
             var firstTax = _context.CarTaxes.First();
-            var result = await _repository.GetAllPaginatedSearch(1, 10, firstTax.Name, "Id", "asc");
+            var result = await _repository.GetAllPaginatedSearch(0, 0, firstTax.Name, null, null);
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Items.Any(t => t.Name == firstTax.Name));

@@ -47,7 +47,7 @@ namespace Infrastructure.UnitTests.Repositories
         public async Task GetAllPaginatedSearch_ShouldFilterByName()
         {
             var firstCenter = _context.Centers.First();
-            var result = await _repository.GetAllPaginatedSearch(1, 10, firstCenter.Name, "Id", "asc");
+            var result = await _repository.GetAllPaginatedSearch(1, 10, firstCenter.Name, null, null);
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Items.Any(c => c.Name == firstCenter.Name));
@@ -56,7 +56,7 @@ namespace Infrastructure.UnitTests.Repositories
         [Test]
         public async Task GetAllPaginatedSearch_ShouldOrderDescending()
         {
-            var result = await _repository.GetAllPaginatedSearch(1, 10, null, "Id", "desc");
+            var result = await _repository.GetAllPaginatedSearch(0, 0, null, "Id", "desc");
 
             Assert.IsNotNull(result);
             var centers = result.Items.ToList();

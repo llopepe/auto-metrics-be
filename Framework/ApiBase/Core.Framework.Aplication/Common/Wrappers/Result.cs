@@ -25,7 +25,6 @@ public class ResultResponse
 
     public ResultResponse AddError(Error error)
     {
-        Errors ??= [];
         Errors.Add(error);
         Success = false;
         return this;

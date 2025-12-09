@@ -105,5 +105,16 @@ namespace Infrastructure.UnitTests.Repositories
             var entry = _context.Entry(car);
             Assert.AreEqual(EntityState.Detached, entry.State);
         }
+
+        [Test]
+        public async Task GetAllByAsync_ShouldReturnFilteredEntities()
+        {
+            var result = await _repository.GetAllByAsync(c => c.Price > 0);
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count > 0);
+            Assert.IsTrue(result.All(c => c.Price > 0));
+        }
     }
+
 }

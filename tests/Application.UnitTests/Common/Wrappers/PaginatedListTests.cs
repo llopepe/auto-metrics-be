@@ -1,9 +1,4 @@
 ﻿using Core.Framework.Aplication.Common.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MockQueryable.Moq;
 
 namespace Application.UnitTests.Common.Wrappers
@@ -19,7 +14,7 @@ namespace Application.UnitTests.Common.Wrappers
             var paginatedList = new PaginatedList<int>(items, count: 10, pageNumber: 2, pageSize: 3);
 
             Assert.AreEqual(2, paginatedList.PageNumber);
-            Assert.AreEqual(4, paginatedList.TotalPages); 
+            Assert.AreEqual(4, paginatedList.TotalPages);
             Assert.AreEqual(10, paginatedList.TotalCount);
             Assert.AreEqual(items, paginatedList.Items);
             Assert.IsTrue(paginatedList.HasPreviousPage);

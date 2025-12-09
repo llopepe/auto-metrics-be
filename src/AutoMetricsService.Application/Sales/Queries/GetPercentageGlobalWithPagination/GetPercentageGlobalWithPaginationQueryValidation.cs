@@ -13,6 +13,14 @@ namespace AutoMetricsService.Application.Sales.Queries.GetSalesByCenterWithPagin
         {
             _centerRepository = centerRepository;
 
+            RuleFor(x => x.CenterId)
+          .GreaterThanOrEqualTo(1)
+          .WithMessage("CenterId debe ser mayor o igual a 1.")
+          .MustAsync(async (model, centerId, ct) =>
+                       await CenterExists(centerId!.Value, ct))
+          .WithMessage("El CenterId especificado no existe.")
+          .When(x => x.CenterId != null);
+
             RuleFor(x => x.PageNumber)
             .GreaterThanOrEqualTo(1).WithMessage("PageNumber debe ser mayor igual a 1.");
 

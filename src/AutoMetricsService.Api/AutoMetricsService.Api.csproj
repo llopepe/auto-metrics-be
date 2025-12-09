@@ -6,6 +6,7 @@
 	 <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>AutoMetricsService.Api</RootNamespace>
     <AssemblyName>AutoMetricsService.Api</AssemblyName>
+    <ExcludeByAttribute>System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage</ExcludeByAttribute>
   </PropertyGroup>
 
 

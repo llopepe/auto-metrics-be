@@ -44,7 +44,7 @@ namespace Infrastructure.UnitTests.Repositories
         [Test]
         public async Task GetAllPaginatedSearch_ShouldFilterByName()
         {
-            var result = await _repository.GetAllPaginatedSearch(1, 10, "Car 1", "Id", "asc");
+            var result = await _repository.GetAllPaginatedSearch(1, 10, "Car 1", null, null);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.TotalCount);
@@ -54,7 +54,7 @@ namespace Infrastructure.UnitTests.Repositories
         [Test]
         public async Task GetAllPaginatedSearch_ShouldOrderDescending()
         {
-            var result = await _repository.GetAllPaginatedSearch(1, 10, null, "Price", "desc");
+            var result = await _repository.GetAllPaginatedSearch(0, 0, null, "Price", "desc");
 
             Assert.IsNotNull(result);
             var cars = result.Items.ToList();
@@ -77,5 +77,7 @@ namespace Infrastructure.UnitTests.Repositories
             bool exists = await _repository.ExistsAsync(999, default);
             Assert.IsFalse(exists);
         }
+
+
     }
 }

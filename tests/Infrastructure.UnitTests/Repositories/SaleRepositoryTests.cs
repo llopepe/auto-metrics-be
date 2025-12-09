@@ -47,10 +47,20 @@ namespace Infrastructure.UnitTests.Repositories
         }
 
         [Test]
+        public async Task GetAllPaginatedSearch_ShouldReturnAllSales_WhenNoFilter_desc()
+        {
+            var result = await _repository.GetAllPaginatedSearch(1, 10, null, "Id", "desc");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(15, result.TotalCount);
+            Assert.AreEqual(1, result.PageNumber);
+        }
+
+        [Test]
         public async Task GetAllPaginatedSearch_ShouldFilterById()
         {
             var firstSale = _context.Sales.First();
-            var result = await _repository.GetAllPaginatedSearch(1, 10, firstSale.Id.ToString(), "Id", "asc");
+            var result = await _repository.GetAllPaginatedSearch(0, 0, firstSale.Id.ToString(), null, null);
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Items.Any(s => s.Id == firstSale.Id));
@@ -74,11 +84,21 @@ namespace Infrastructure.UnitTests.Repositories
             Assert.IsTrue(result.Items.All(r => r.SalesVolume > 0));
         }
 
+
+        [Test]
+        public async Task GetSalesByCenterPaginatedAsync_ShouldReturnGroupedSales_NullSortDirection()
+        {
+            var result = await _repository.GetSalesByCenterPaginatedAsync(null, 1, 10, null, null, default);
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Items.All(r => r.SalesVolume > 0));
+        }
+
         [Test]
         public async Task GetSalesByCenterPaginatedAsync_ShouldFilterByCenterId()
         {
             var center = _context.Centers.First();
-            var result = await _repository.GetSalesByCenterPaginatedAsync(center.Id, 1, 10, "SalesVolume", "desc", default);
+            var result = await _repository.GetSalesByCenterPaginatedAsync(center.Id, 0, 0, "SalesVolume", "desc", default);
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Items.All(r => r.CenterId == center.Id));
@@ -88,6 +108,26 @@ namespace Infrastructure.UnitTests.Repositories
         public async Task GetPercentageGlobalPaginatedAsync_ShouldReturnPercentages()
         {
             var result = await _repository.GetPercentageGlobalPaginatedAsync(1, 10, "CenterName", "asc", default);
+
+            Assert.IsNotNull(result);
+            var totalPercentage = result.Items.Sum(r => r.PercentageOfGlobal);
+            Assert.IsTrue(totalPercentage <= 100);
+        }
+
+        [Test]
+        public async Task GetPercentageGlobalPaginatedAsync_ShouldReturnPercentages_Desc()
+        {
+            var result = await _repository.GetPercentageGlobalPaginatedAsync(1, 10, "CenterName", "desc", default);
+
+            Assert.IsNotNull(result);
+            var totalPercentage = result.Items.Sum(r => r.PercentageOfGlobal);
+            Assert.IsTrue(totalPercentage <= 100);
+        }
+
+        [Test]
+        public async Task GetPercentageGlobalPaginatedAsync_ShouldReturnPercentages_NullSortDirection()
+        {
+            var result = await _repository.GetPercentageGlobalPaginatedAsync(0, 0, null, null, default);
 
             Assert.IsNotNull(result);
             var totalPercentage = result.Items.Sum(r => r.PercentageOfGlobal);

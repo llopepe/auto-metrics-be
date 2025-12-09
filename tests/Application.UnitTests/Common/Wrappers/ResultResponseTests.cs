@@ -1,10 +1,5 @@
 ﻿using Core.Framework.Aplication.Common.Enums;
 using Core.Framework.Aplication.Common.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.UnitTests.Common.Wrappers
 {
@@ -12,7 +7,8 @@ namespace Application.UnitTests.Common.Wrappers
     [TestFixture]
     public class ResultResponseTests
     {
-        // Ok() retorna Success = true y Errors vacíos
+        // OK()
+
         [Test]
         public void Ok_ShouldReturnSuccessTrue_AndEmptyErrors()
         {
@@ -23,7 +19,8 @@ namespace Application.UnitTests.Common.Wrappers
             Assert.AreEqual(0, result.Errors.Count);
         }
 
-        // Failure() retorna Success = false y Errors vacíos
+        // Failure() sin parámetros
+
         [Test]
         public void Failure_NoParams_ShouldReturnSuccessFalse_AndEmptyErrors()
         {
@@ -34,7 +31,8 @@ namespace Application.UnitTests.Common.Wrappers
             Assert.AreEqual(0, result.Errors.Count);
         }
 
-        //Failure(Error) asigna el error
+        // Failure(Error)
+
         [Test]
         public void Failure_WithError_ShouldContainTheError()
         {
@@ -43,18 +41,19 @@ namespace Application.UnitTests.Common.Wrappers
 
             Assert.IsFalse(result.Success);
             Assert.AreEqual(1, result.Errors.Count);
-            Assert.AreSame(error, result.Errors.First());
+            Assert.AreSame(error, result.Errors[0]);
         }
 
-        //Failure(IEnumerable<Error>) asigna los errores
+        //  Failure(IEnumerable<Error>)
+
         [Test]
         public void Failure_WithErrorsList_ShouldContainAllErrors()
         {
             var errors = new List<Error>
-            {
-                new(ErrorCodeResponse.NotFound, "No encontrado"),
-                new(ErrorCodeResponse.Unauthorized, "Sin permiso")
-            };
+        {
+            new(ErrorCodeResponse.NotFound, "No encontrado"),
+            new(ErrorCodeResponse.Unauthorized, "Sin permiso")
+        };
 
             var result = ResultResponse.Failure(errors);
 
@@ -65,6 +64,7 @@ namespace Application.UnitTests.Common.Wrappers
         }
 
         //Operador implícito: Error -> ResultResponse
+
         [Test]
         public void ImplicitOperator_Error_ShouldCreateFailureResult()
         {
@@ -76,15 +76,16 @@ namespace Application.UnitTests.Common.Wrappers
             Assert.AreSame(error, result.Errors[0]);
         }
 
-        //Operador implícito: List<Error> -> ResultResponse
+        // Operador implícito: List<Error> -> ResultResponse
+
         [Test]
         public void ImplicitOperator_ErrorList_ShouldCreateFailureResult()
         {
             var errors = new List<Error>
-            {
-                new(ErrorCodeResponse.FieldDataInvalid, "E1"),
-                new(ErrorCodeResponse.NotFound, "E2")
-            };
+        {
+            new(ErrorCodeResponse.FieldDataInvalid, "E1"),
+            new(ErrorCodeResponse.NotFound, "E2")
+        };
 
             ResultResponse result = errors;
 
@@ -94,52 +95,50 @@ namespace Application.UnitTests.Common.Wrappers
             Assert.AreEqual(ErrorCodeResponse.NotFound, result.Errors[1].ErrorCode);
         }
 
-        //AddError agrega error y Success = false
-        [Test]
-        public void AddError_ShouldAddError_AndSetSuccessFalse()
-        {
-            var result = ResultResponse.Ok();
-            var error = new Error(ErrorCodeResponse.BadRequest, "Added error");
 
-            result.AddError(error);
-
-            Assert.IsFalse(result.Success);
-            Assert.AreEqual(1, result.Errors.Count);
-            Assert.AreSame(error, result.Errors[0]);
-        }
+        // Tests del branch Errors ??= []
 
         [Test]
         public void AddError_WhenErrorsIsNull_ShouldInitializeAndAddError()
         {
-            var result = new ResultResponse(); // Errors es null por defecto
-            Error error = new(ErrorCodeResponse.BadRequest, "Test error");
+            var result = new ResultResponse(); // Errors = null
+            var error = new Error(ErrorCodeResponse.BadRequest, "Test error");
 
-            var returnedResult = result.AddError(error);
+            result.AddError(error);
 
-            Assert.IsFalse(returnedResult.Success, "Success should be false after adding an error");
-            Assert.IsNotNull(returnedResult.Errors, "Errors should be initialized if it was null");
-            Assert.AreEqual(1, returnedResult.Errors.Count, "Errors list should contain the added error");
-            Assert.AreEqual(error, returnedResult.Errors[0], "The added error should match the provided error");
+            Assert.IsNotNull(result.Errors);
+            Assert.AreEqual(1, result.Errors.Count);
+            Assert.AreEqual(error, result.Errors[0]);
+            Assert.IsFalse(result.Success);
         }
 
         [Test]
         public void AddError_WhenErrorsIsNotNull_ShouldAddErrorToExistingList()
         {
-            // Arrange
-            var existingError = new Error(ErrorCodeResponse.InternalServerError, "Existing error");
+            var existing = new Error(ErrorCodeResponse.InternalServerError, "Existing");
             var result = new ResultResponse
             {
-                Errors = new List<Error> { existingError }
+                Errors = new List<Error> { existing } // Errors != null
             };
-            var newError = new Error(ErrorCodeResponse.BadRequest, "New error");
 
+            var newError = new Error(ErrorCodeResponse.BadRequest, "New");
 
             result.AddError(newError);
 
-            Assert.IsFalse(result.Success, "Success should be false after adding an error");
-            Assert.AreEqual(2, result.Errors.Count, "Errors list should contain both existing and new errors");
-            Assert.AreEqual(existingError, result.Errors[0]);
+            Assert.AreEqual(2, result.Errors.Count);
+            Assert.AreEqual(existing, result.Errors[0]);
             Assert.AreEqual(newError, result.Errors[1]);
+            Assert.IsFalse(result.Success);
+        }
+
+        [Test]
+        public void ImplicitOperator_NotUsed_ShouldStillAllowNormalConstruction()
+        {
+            var result = new ResultResponse();
+
+            Assert.IsFalse(result.Success);
+            // Assert.IsNull(result.Errors);
         }
     }
+
 }

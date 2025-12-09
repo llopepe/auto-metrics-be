@@ -1,10 +1,5 @@
 ﻿using AutoMetricsService.Application.Sales.Queries.GetSaleWithPagination;
 using FluentValidation.TestHelper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.UnitTests.Sales.Queries.GetSaleWithPagination
 {
@@ -40,5 +35,6 @@ namespace Application.UnitTests.Sales.Queries.GetSaleWithPagination
             var result = _validator.TestValidate(model);
             result.ShouldNotHaveAnyValidationErrors();
         }
+
     }
 }

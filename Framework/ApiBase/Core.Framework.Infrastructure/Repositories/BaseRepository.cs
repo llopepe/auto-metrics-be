@@ -1,5 +1,4 @@
 ﻿using Core.Framework.Aplication.Interfaces.Repositories.Base;
-using Core.Framework.Domain.Interfaces;
 using Core.Framework.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -43,15 +42,8 @@ namespace Core.Framework.Infrastructure.Repositories
 
         public async Task<T> DeleteAsync(T entity)
         {
-            if (entity is ISoftDeletable softDeletable)
-            {
-                softDeletable.IsDeleted = true;
-                _dbSet.Update(entity);
-            }
-            else
-            {
-                _dbSet.Remove(entity);
-            }
+            _dbSet.Remove(entity);
+
             await _context.SaveChangesAsync();
 
             return entity;

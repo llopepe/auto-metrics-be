@@ -109,6 +109,7 @@ namespace Application.UnitTests.Sales.CreateSale
             };
 
             var car = new Car { Id = 100, Price = 100m };
+
             var taxes = new List<CarTax>
             {
                 new CarTax { Id = 1, CarId = 100, Name = "Tax1", Percentage = 10m },
@@ -125,5 +126,7 @@ namespace Application.UnitTests.Sales.CreateSale
             // Total esperado: base 100*2=200, impuestos: 200*0.10=20 + 200*0.05=10 -> total=230
             _saleRepoMock.Verify(x => x.AddAsync(It.Is<Sale>(s => s.Total == 230m)), Times.Once);
         }
+
+
     }
 }

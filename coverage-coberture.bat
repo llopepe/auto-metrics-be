@@ -27,21 +27,27 @@ echo =====================================
 echo Ejecutando todos los tests con cobertura
 echo =====================================
 
-dotnet test tests\Domain.UnitTests --collect:"XPlat Code Coverage"
+call dotnet test "tests\Domain.UnitTests" --collect:"XPlat Code Coverage"
 if %errorlevel% neq 0 (
     echo ❌ Error al ejecutar Domain.UnitTests
     exit /b 1
 )
 
-dotnet test tests\Application.UnitTests --collect:"XPlat Code Coverage"
+call dotnet test "tests\Application.UnitTests" --collect:"XPlat Code Coverage"
 if %errorlevel% neq 0 (
     echo ❌ Error al ejecutar Application.UnitTests
     exit /b 1
 )
 
-dotnet test tests\Infrastructure.UnitTests --collect:"XPlat Code Coverage"
+call dotnet test "tests\Infrastructure.UnitTests" --collect:"XPlat Code Coverage"
 if %errorlevel% neq 0 (
     echo ❌ Error al ejecutar Infrastructure.UnitTests
+    exit /b 1
+)
+
+call dotnet test "tests\Application.Functional.UnitTests" --collect:"XPlat Code Coverage"
+if %errorlevel% neq 0 (
+    echo ❌ Error al ejecutar Application.Functional.UnitTests
     exit /b 1
 )
 

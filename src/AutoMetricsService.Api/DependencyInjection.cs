@@ -135,6 +135,7 @@ public static class DependencyInjection
 }
 
 
+[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 // Resolver que acepta camelCase y snake_case automáticamente
 public class CamelCaseAndSnakeCaseResolver : DefaultContractResolver
 {

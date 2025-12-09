@@ -5,11 +5,6 @@ using Core.Framework.Aplication.Common.Wrappers;
 using Microsoft.Extensions.Logging;
 using MockQueryable.Moq;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.UnitTests.Sales.Queries.GetSaleWithPagination
 {

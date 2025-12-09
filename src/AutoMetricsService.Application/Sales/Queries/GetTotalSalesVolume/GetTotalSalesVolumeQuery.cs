@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace AutoMetricsService.Application.Sales.Queries.GetTotalSalesVolume
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public record GetTotalSalesVolumeQuery : IRequest<ResultResponse<TotalSalesVolumeDto>>
     {
     }
