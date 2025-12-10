@@ -406,6 +406,9 @@ Abrí:
 
 👉 https://localhost:5001/swagger
 
+<img width="1342" height="895" alt="image" src="https://github.com/user-attachments/assets/2f408592-bfc0-494b-b05e-c4bd28be30bb" />
+
+
 La solución ya incluye datos iniciales, por lo que podés probar los endpoints sin necesidad de cargar nada manualmente.
 
 🔐 Autenticación obligatoria
