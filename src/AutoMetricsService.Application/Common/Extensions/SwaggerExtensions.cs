@@ -38,9 +38,21 @@ namespace AutoMetricsService.Application.Common.Extensions
                 {
                     Version = "v1",
                     Title = "Net Auto Metrics",
-                    Description = $"API Auto Metrics Build Date: {BuildInfoExtension.GetBuildDate()} <br/>"
+                    Description = $$"""
+                                    API Auto Metrics Build Date: {{BuildInfoExtension.GetBuildDate()}}
 
+                                    ## 🔐 POST /api/Auth/login
+
+                                    ### Body de Usuario:
+
+                                    ```json
+                                    {
+                                      "email": "admin@autometrics.dev",
+                                      "password": "Admin123!"
+                                    }
+                                    """
                 });
+          
                 swagger.MapType<TimeSpan>(() => new OpenApiSchema
                 {
                     Type = "string",
