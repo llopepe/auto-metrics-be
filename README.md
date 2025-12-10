@@ -122,7 +122,6 @@ El microservicio utiliza **Clean Architecture** con las capas:
                      │ EF Core / Repositorios / Logs │
                      └───────────────────────────────┘
 
----
 
 ---
 
@@ -408,10 +407,60 @@ Abrí:
 
 <img width="1342" height="895" alt="image" src="https://github.com/user-attachments/assets/2f408592-bfc0-494b-b05e-c4bd28be30bb" />
 
+En los **Response header** se muestra la informacion del tiempo ejecucación de los metodos.
+<img width="434" height="129" alt="image" src="https://github.com/user-attachments/assets/dc7118f4-3dc9-4168-b100-10ade2a7dc9d" />
+
+Tambien se guarda la info en el LOG.
 
 La solución ya incluye datos iniciales, por lo que podés probar los endpoints sin necesidad de cargar nada manualmente.
 
-🔐 Autenticación obligatoria
+### 📘 Datos Iniciales de la Base de Datos
+
+Este README muestra los datos de inicio que se cargan automáticamente mediante DbInitializer.
+
+🏢 Centers
+| Id | Name               |
+| -- | ------------------ |
+| 1  | Centro Norte       |
+| 2  | Centro Sur         |
+| 3  | Distribuidor Andes |
+| 4  | Costa Premium      |
+
+
+🚗 Cars
+| Id | Name    | Price  |
+| -- | ------- | ------ |
+| 1  | Sedan   | 8,000  |
+| 2  | SUV     | 9,500  |
+| 3  | Offroad | 12,500 |
+| 4  | Sport   | 18,200 |
+
+
+💰 CarTaxes
+| Id | CarId | Name              | Percentage |
+| -- | ----- | ----------------- | ---------- |
+| 1  | 4     | Impuesto Sport 7% | 7          |
+
+
+🛒 Sales
+| Id | CenterId | CarId | Units | UnitPrice | TotalTax | Total  | Date                      | UserName |
+| -- | -------- | ----- | ----- | --------- | -------- | ------ | ------------------------- | -------- |
+| 1  | 1        | 1     | 3     | 8,000     | 0        | 24,000 | 2025-01-10T00:00:00+00:00 | System   |
+| 2  | 2        | 2     | 4     | 9,500     | 0        | 38,000 | 2025-01-25T00:00:00+00:00 | System   |
+| 3  | 3        | 3     | 2     | 12,500    | 0        | 25,000 | 2025-02-02T00:00:00+00:00 | System   |
+| 4  | 4        | 4     | 1     | 18,200    | 1,274    | 19,474 | 2025-02-18T00:00:00+00:00 | System   |
+| 5  | 1        | 2     | 5     | 9,500     | 0        | 47,500 | 2025-03-05T00:00:00+00:00 | System   |
+| 6  | 2        | 3     | 1     | 12,500    | 0        | 12,500 | 2025-03-20T00:00:00+00:00 | System   |
+| 7  | 3        | 4     | 2     | 18,200    | 2,548    | 38,948 | 2025-04-12T00:00:00+00:00 | System   |
+| 8  | 4        | 1     | 6     | 8,000     | 0        | 48,000 | 2025-05-03T00:00:00+00:00 | System   |
+
+
+👤 Users
+| Email                                                 | FullName          | Roles      | IsActive |
+| ----------------------------------------------------- | ----------------- | ---------- | -------- |
+| [admin@autometrics.dev](mailto:admin@autometrics.dev) | AutoMetrics Admin | Admin,User | True     |
+
+### 🔐 Autenticación obligatoria
 
 Antes de ejecutar cualquier endpoint protegido, primero debés iniciar sesión con:
 
@@ -490,6 +539,4 @@ Allí podrás ver:
 - Resumen global de Branch Coverage y Lines Coverage
 
 <img width="1686" height="800" alt="image" src="https://github.com/user-attachments/assets/cd02e8bb-fb5f-479a-8aa1-44bae481b3cf" />
-
-
 
