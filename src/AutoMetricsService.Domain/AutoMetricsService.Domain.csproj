@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>AutoMetricsService.Domain</RootNamespace>
+    <AssemblyName>AutoMetricsService.Domain</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\ApiBase\Core.Framework.Domain\Core.Framework.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
