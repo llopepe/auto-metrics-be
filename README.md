@@ -528,7 +528,11 @@ Esta sección explica cómo generar un reporte de cobertura de código y visuali
 
 ### Ejecutar tests con cobertura
 
-Ejecuta el siguiente bat desde la raíz del proyecto: **coverage-coberture.bat (Antes de ejecutar tener instaldo reportgenerator)**
+Ejecuta el siguiente bat desde la raíz del proyecto: **coverage-coberture.bat (Antes de ejecutar tener instalado reportgenerator)**
+
+```bash
+dotnet tool install -g dotnet-reportgenerator-globaltool
+```
 
 Esto generará los archivos de cobertura dentro de la carpeta **TestResults** y **coverageReport\index.htm**.
 
